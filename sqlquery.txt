@@ -1,0 +1,29 @@
+SELECT * FROM users;
+
+SELECT (user_name,sur_name) FROM public.users; //działa z public i bez \
+
+ALTER TABLE IF EXISTS users ADD COLUMN test_column INT 
+
+ALTER TABLE IF EXISTS users
+ADD COLUMN col1 VARCHAR NOT NULL,
+ADD COLUMN col2 INT NOT NUT NUFLL DEAFULT=10,
+
+
+ALTER TABLE users 
+ADD COLUMN col_With_def_val DEFAULT 0
+
+
+SELECT name_,sur_name FROM users WHERE age % 2 =0;
+
+
+SELECT name_ , sur_name FROM users WHERE LENGTH(name_) = 5 OR name_ IS NULL;
+
+Schemat to sposób na logiczne oddzielnie danych i zorganizowanie ich 
+Schematy są niezależne od siebie
+Postgres jeśli nie podam schematu domyślnie są public
+
+CREATE my_schema;
+
+przenoszenie tabeli z public do my_schema
+
+ALTER TABLE public.users SET SCHEMA my_schema;
