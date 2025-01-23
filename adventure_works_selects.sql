@@ -1,5 +1,3 @@
--- ZnajdŸ wszystkie zamówienia dla klienta o CustomerID równym 1, które zawieraj¹ 
---wiêcej ni¿ 5 ró¿nych produktów. U¿yj tabel Sales.SalesOrderHeader i Sales.SalesOrderDetail.
 
 select 
 soh.CustomerID,
