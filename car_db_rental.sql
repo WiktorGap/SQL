@@ -1,5 +1,5 @@
---CREATE DATABASE car_rental;
-/*
+CREATE DATABASE car_rental;
+
 CREATE TABLE customers
 (
 	customers_id SERIAL PRIMARY KEY,
@@ -9,8 +9,7 @@ CREATE TABLE customers
 	phone_no VARCHAR(15),
 	date_of_register TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-*/
-/*
+
 CREATE TYPE avaibility AS ENUM ('unaviable', 'aviable','reserved','in service');
 
 
@@ -22,8 +21,7 @@ CREATE TABLE cars
 	production_year INT CHECK (production_year <= 1985) NOT NULL,
 	status avaibility DEFAULT 'aviable'	
 );
-*/
-/*
+
 CREATE TABLE reservations
 (
 	resarvations_id SERIAl PRIMARY KEY,
@@ -33,8 +31,7 @@ CREATE TABLE reservations
 	date_to DATE NOT NULL,
 	status avaibility DEFAULT 'in service'
 )
-*/
-/*
+
 CREATE TABLE payments
 (
 	payments_id SERIAL PRIMARY KEY,
@@ -42,8 +39,7 @@ CREATE TABLE payments
 	amount DECIMAL(10,2) NOT NULL,
 	date_of_payment DATE DEFAULT CURRENT_DATE
 );
-*/
-/*
+
 CREATE VIEW active_reservations AS
 SELECT 
     cs.name_,
@@ -59,22 +55,20 @@ JOIN
 JOIN 
     customers cs ON cs.customers_id = r.customers_id;
 
-*/
 
-/*
 CREATE MATERIALIZED VIEW month_salary AS 
 SELECT DATE_TRUNC('month',p.date_of_payment) AS month_,
 SUM(p.amount) AS amount_income
 FROM payments p
 GROUP BY DATE_TRUNC('month',p.date_of_payment)
-*/
---ALTER TABLE reservations ADD COLUMN daily_price DECIMAL(10,2) NOT NULL DEFAULT 150.00;
-/*
+
+ALTER TABLE reservations ADD COLUMN daily_price DECIMAL(10,2) NOT NULL DEFAULT 150.00;
+
 CREATE TYPE cancel_flag AS ENUM ('ok','canceled');
 ALTER TABLE reservations ADD COLUMN set_flag_to_cancel cancel_flag DEFAULT 'ok';
-*/
 
-/*
+
+
 CREATE OR REPLACE PROCEDURE cancel_reservations(resarvations_id INT )
 LANGUAGE plpgsql
 AS
@@ -87,17 +81,17 @@ BEGIN
 	END IF;
 END
 $$;
-*/
 
-/* CREATE OR REPLACE PROCEDURE name_od_procedure(arg_name arg_type) 
+
+ CREATE OR REPLACE PROCEDURE name_od_procedure(arg_name arg_type) 
 LANGUAGE language
 AS
 $$
 BEGIN
 
 END
-$$;*/
-/*
+$$;
+
 CREATE OR REPLACE FUNCTION total_reservation_cost(date_since DATE , date_to DATE, daily_price DECIMAL)
 RETURNS DECIMAL 
 AS
@@ -106,8 +100,7 @@ BEGIN
 	RETURN(date_since - date_from) * daily_price;
 END
 $$LANGUAGE plpgsql;
-*/
-/*
+
 CREATE OR REPLACE FUNCTION add_payment()
 RETURNS TRIGGER AS
 $$
@@ -126,8 +119,8 @@ CREATE TRIGGER trg_add_payment
 AFTER INSERT ON reservations
 FOR EACH ROW 
 EXECUTE FUNCTION add_payment();
-*/
-/*
+
+
 INSERT INTO customers (name_, surname, email, phone_no)
 VALUES 
 ('Jan', 'Kowalski', 'jan.kowalski@email.com', '123456789'),
@@ -150,12 +143,11 @@ VALUES
 ('Jacek', 'Stolarz', 'jacek.stolarz@email.com', '134762589'),
 ('Iwona', 'Adamczyk', 'iwona.adamczyk@email.com', '295736481'),
 ('Piotr', 'Kaczmarczyk', 'piotr.kaczmarczyk@email.com', '528364017');
-*/
 
---ALTER TYPE avaibility ADD VALUE IF NOT EXISTS 'available';
---ALTER TABLE cars DROP CONSTRAINT cars_production_year_check;
---ALTER TABLE cars ADD CONSTRAINT cars_production_year_check CHECK (production_year >= 2000);
-/*
+ALTER TYPE avaibility ADD VALUE IF NOT EXISTS 'available';
+ALTER TABLE cars DROP CONSTRAINT cars_production_year_check;
+ALTER TABLE cars ADD CONSTRAINT cars_production_year_check CHECK (production_year >= 2000);
+
 INSERT INTO cars (brand, model, production_year, status)
 VALUES 
 ('Toyota', 'Corolla', 2019, 'available'),
@@ -184,11 +176,11 @@ e'),
 
 
 
---SELECT * FROM customers;
---SELECT  * FROM cars;
+SELECT * FROM customers;
+SELECT  * FROM cars;
 
---ALTER TYPE avaibility ADD VALUE IF NOT EXISTS 'reserved';
-/*
+ALTER TYPE avaibility ADD VALUE IF NOT EXISTS 'reserved';
+
 CREATE OR REPLACE FUNCTION total_reservation_cost(date_since DATE, date_to DATE, daily_price DECIMAL)
 RETURNS DECIMAL 
 AS
@@ -198,8 +190,7 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-*/
-/*
+
 INSERT INTO reservations (customers_id, car_id, date_since, date_to, status)
 VALUES 
 (1, 2, '2025-01-01', '2025-01-07', 'reserved'),
@@ -222,7 +213,7 @@ VALUES
 (18, 19, '2026-06-10', '2026-06-16', 'reserved'),
 (19, 20, '2026-07-12', '2026-07-18', 'reserved'),
 (20, 21, '2026-08-14', '2026-08-20', 'reserved');
-*/
 
---SELECT * FROM reservations;
+
+SELECT * FROM reservations;
 
