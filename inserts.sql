@@ -1,4 +1,4 @@
-/*INSERT INTO organisation_schema.customers (name, email) VALUES
+INSERT INTO organisation_schema.customers (name, email) VALUES
 ('John Doe', 'john.doe@example.com'),
 ('Jane Smith', 'jane.smith@example.com'),
 ('Alice Johnson', 'alice.johnson@example.com'),
@@ -29,8 +29,8 @@
 ('Zane Nelson', 'zane.nelson@example.com'),
 ('Amy Perry', 'amy.perry@example.com'),
 ('Brian Reed', 'brian.reed@example.com');
-*/
-/*
+
+
 INSERT INTO organisation_schema.products (name, price, stock) VALUES
 ('Laptop', 1200.50, 10),
 ('Mouse', 25.75, 100),
@@ -63,16 +63,16 @@ INSERT INTO organisation_schema.products (name, price, stock) VALUES
 ('Portable Speaker', 80.00, 25),
 ('Bluetooth Earbuds', 90.00, 40);
 */
-/*
+
 INSERT INTO organisation_schema.orders (customer_id, order_date, status) VALUES
 (1, '2025-01-01 10:00:00', 'Pending'),
 (2, '2025-01-01 11:00:00', 'Pending'),
 (3, '2025-01-02 14:30:00', 'Pending');
-*/
+
 SELECT table_name
 FROM information_schema.tables
 WHERE table_schema = 'organisation_schema';
-/*
+
 INSERT INTO organisation_schema.order_details (order_id, product_id, quantity, price) VALUES
 (1, 1, 1, 1200.50), -- John buys 1 Laptop
 (1, 2, 2, 25.75),   -- John buys 2 Mice
