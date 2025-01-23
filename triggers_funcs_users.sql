@@ -1,4 +1,4 @@
-/*CREATE OR REPLACE FUNCTION update_car_status_after_paymenent()
+CREATE OR REPLACE FUNCTION update_car_status_after_paymenent()
 RETURNS TRIGGER
 AS
 $$
@@ -12,8 +12,8 @@ CREATE TRIGGER trg_update_car_status_after_paymenent
 AFTER UPDATE ON payments 
 FOR EACH ROW 
 EXECUTE FUNCTION update_car_status_after_paymenent();
-*/
-/*
+
+
 CREATE TABLE cars_log
 (
 	log_id SERIAL PRIMARY KEY,
@@ -22,8 +22,8 @@ CREATE TABLE cars_log
 	new_status VARCHAR(50),
 	change_time TIMESTAMP DEFAULT NOW()
 )
-*/
-/*
+
+
 CREATE OR REPLACE FUNCTION log_car_status_change()
 RETURNS TRIGGER AS 
 $$
@@ -32,15 +32,12 @@ BEGIN
 	RETURN NEW;
 END;
 $$LANGUAGE plpgsql;
-*/
-/*
+
 CREATE TRIGGER trg_log_car_status_change
 AFTER UPDATE OF status ON cars
 FOR EACH ROW 
 EXECUTE FUNCTION log_car_status_change();
-*/
 
-/*
 CREATE OR REPLACE FUNCTION delete_payment_after_reservation()
 RETURNS TRIGGER 
 AS 
@@ -50,21 +47,20 @@ BEGIN
 	RETURN OLD;
 END;
 $$LANGUAGE plpgsql;
-*/
-/*
+
+
 CREATE TRIGGER trg_delete_payment_after_reservation
 AFTER DELETE ON reservations 
 FOR EACH ROW 
 EXECUTE FUNCTION delete_payment_after_reservation();
-*/
-/*
+
 CREATE USER report_user WITH PASSWORD 'report';
 CREATE ROLE report_role;
-*/
---GRANT SELECT ON TABLE  month_salary TO report_role;
---ALTER ROLE report_user VALID UNTIL '2025-02-20';
---GRANT report_role TO report_user;
-/*
+
+GRANT SELECT ON TABLE  month_salary TO report_role;
+ALTER ROLE report_user VALID UNTIL '2025-02-20';
+GRANT report_role TO report_user;
+
 CREATE OR REPLACE FUNCTION count_active_reservations(customer_id INT)
 RETURNS INT 
 AS
@@ -78,8 +74,7 @@ BEGIN
 
 END;
 $$LANGUAGE plpgsql;
-*/
-/*
+
 CREATE OR REPLACE PROCEDURE change_user_passwd(username TEXT,new_passwd TEXT)
 LANGUAGE plpgsql
 AS
@@ -90,17 +85,17 @@ END;
 $$
 */
 
-/*
+
 CREATE ROLE viewer_role;
 CREATE USER viewer_user WITH PASSWORD '123';
 GRANT viewer_role TO viewer_user;
-*/
 
---GRANT SELECT ON TABLE customers, reservations TO viewer_role;
 
---GRANT USAGE ON SCHEMA public TO viewer_role;
+GRANT SELECT ON TABLE customers, reservations TO viewer_role;
 
-/*
+GRANT USAGE ON SCHEMA public TO viewer_role;
+
+
 CREATE OR REPLACE PROCEDURE cancel_all_reservations(customer_id INT)
 LANGUAGE plpgsql
 AS
